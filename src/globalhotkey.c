@@ -9,30 +9,26 @@ static OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEve
 }
 int main(void)
 {
-	OSStatus err = noErr;
-
-	EventHotKeyRef gMyHotKeyRef;
-	EventHotKeyID gMyHotKeyID;
 	EventTypeSpec eventType;
-
 	eventType.eventClass=kEventClassKeyboard;
 	eventType.eventKind=kEventHotKeyPressed;
-	err = InstallApplicationEventHandler(NewEventHandlerUPP(MyHotKeyHandler),1,&eventType,NULL,NULL);
+
+	OSStatus err = InstallApplicationEventHandler(NewEventHandlerUPP(MyHotKeyHandler),1,&eventType,NULL,NULL);
 
 	if(err != noErr){
-
 		printf("Error: Could not install carbon event hook for input!\n");
 		exit(0);
 	}
 
+	EventHotKeyRef gMyHotKeyRef;
+	EventHotKeyID gMyHotKeyID;
 	gMyHotKeyID.signature='htk1';
 	gMyHotKeyID.id=1;
 
 	RegisterEventHotKey(49, cmdKey, gMyHotKeyID, GetEventDispatcherTarget(), 0, &gMyHotKeyRef);
 
-	EventRef        event;
-	EventTargetRef    eventTarget;
-	eventTarget = GetEventDispatcherTarget();
+	EventRef event;
+	EventTargetRef eventTarget = GetEventDispatcherTarget();
 
 	while( ReceiveNextEvent( 0, NULL, kDurationForever, TRUE, &event ) == noErr )
 	{
