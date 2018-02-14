@@ -1,5 +1,43 @@
 #include "wrapper_reduced.h"
-//#include "wrapper.h"
+
+// forward decl
+
+enum {
+    noErr = 0,
+    kDurationImmediate = 0,
+    kDurationForever = 0x7FFFFFFF,
+    kDurationMillisecond = 1,
+    kDurationMicrosecond = -1,
+    kEventClassMouse = 'mous',
+    kEventClassKeyboard = 'keyb',
+    kEventClassTextInput = 'text',
+    kEventClassApplication = 'appl',
+    kEventClassAppleEvent = 'eppc',
+    kEventClassMenu = 'menu',
+    kEventClassWindow = 'wind',
+    kEventClassControl = 'cntl',
+    kEventClassCommand = 'cmds',
+    kEventClassTablet = 'tblt',
+    kEventClassVolume = 'vol ',
+    kEventClassAppearance = 'appm',
+    kEventClassService = 'serv',
+    kEventClassToolbar = 'tbar',
+    kEventClassToolbarItem = 'tbit',
+    kEventClassToolbarItemView = 'tbiv',
+    kEventClassAccessibility = 'acce',
+    kEventClassSystem = 'macs',
+    kEventClassInk = 'ink ',
+    kEventClassTSMDocumentAccess = 'tdac',
+    kEventClassGesture = 'gest',
+    kEventRawKeyDown = 1,
+    kEventRawKeyRepeat = 2,
+    kEventRawKeyUp = 3,
+    kEventRawKeyModifiersChanged = 4,
+    kEventHotKeyPressed = 5,
+    kEventHotKeyReleased = 6
+};
+
+// app
 
 static OSStatus MyHotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
 {
