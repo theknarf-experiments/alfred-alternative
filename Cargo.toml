@@ -5,3 +5,7 @@ authors = ["Mads Røskar <madshvero@gmail.com>", "Frank Lyder Bredland"]
 
 [dependencies]
 cocoa = "0.10.0"
+libc = "0.2.0"
+
+[build-dependencies]
+bindgen = "0.32.3"
