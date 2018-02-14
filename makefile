@@ -1,5 +1,5 @@
 all:
-	 gcc -Wall -w -o target/hotkey examples/globalhotkey.c -framework Carbon -ferror-limit=100 
+	 gcc -Wall -o target/hotkey examples/globalhotkey.c -framework Carbon -ferror-limit=100 
 
 bindgen:
 	RUST_BACKTRACE=1 rustup run stable bindgen wrapper.h > wrapper.rs
