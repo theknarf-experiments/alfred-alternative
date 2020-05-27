@@ -1,56 +1,18 @@
-/*
- *  Copied example from: https://github.com/servo/cocoa-rs/blob/master/examples/hello_world.rs
- */
-extern crate cocoa;
-
-use cocoa::base::{selector, nil, NO};
-use cocoa::foundation::{NSRect, NSPoint, NSSize, NSAutoreleasePool, NSProcessInfo,
-                        NSString};
-use cocoa::appkit::{NSApp, NSApplication, NSApplicationActivationPolicyRegular, NSWindow,
-                    NSTitledWindowMask, NSBackingStoreBuffered, NSMenu, NSMenuItem,
-                    NSRunningApplication, NSApplicationActivateIgnoringOtherApps};
+// Example copied from: https://github.com/Boscop/web-view
+extern crate web_view;
+use web_view::*;
 
 fn main() {
-    unsafe {
-        let _pool = NSAutoreleasePool::new(nil);
+    let html_content = "<html><body><h1>Hello, World!</h1></body></html>";
 
-        let app = NSApp();
-        app.setActivationPolicy_(NSApplicationActivationPolicyRegular);
-
-        // create Menu Bar
-        let menubar = NSMenu::new(nil).autorelease();
-        let app_menu_item = NSMenuItem::new(nil).autorelease();
-        menubar.addItem_(app_menu_item);
-        app.setMainMenu_(menubar);
-
-        // create Application menu
-        let app_menu = NSMenu::new(nil).autorelease();
-        let quit_prefix = NSString::alloc(nil).init_str("Quit");
-        let quit_title =
-            quit_prefix.stringByAppendingString_(NSProcessInfo::processInfo(nil).processName());
-        let quit_action = selector("terminate:");
-        let quit_key = NSString::alloc(nil).init_str("q");
-        let quit_item = NSMenuItem::alloc(nil)
-            .initWithTitle_action_keyEquivalent_(quit_title, quit_action, quit_key)
-            .autorelease();
-        app_menu.addItem_(quit_item);
-        app_menu_item.setSubmenu_(app_menu);
-
-        // create Window
-        let window = NSWindow::alloc(nil)
-            .initWithContentRect_styleMask_backing_defer_(NSRect::new(NSPoint::new(0., 0.),
-                                                                      NSSize::new(200., 200.)),
-                                                          NSTitledWindowMask,
-                                                          NSBackingStoreBuffered,
-                                                          NO)
-            .autorelease();
-        window.cascadeTopLeftFromPoint_(NSPoint::new(20., 20.));
-        window.center();
-        let title = NSString::alloc(nil).init_str("Hello World!");
-        window.setTitle_(title);
-        window.makeKeyAndOrderFront_(nil);
-        let current_app = NSRunningApplication::currentApplication(nil);
-        current_app.activateWithOptions_(NSApplicationActivateIgnoringOtherApps);
-        app.run();
-    }
+    web_view::builder()
+        .content(Content::Html(html_content))
+        .size(320, 480)
+        .resizable(false)
+        .frameless(true)
+        .debug(true)
+        .user_data(())
+        .invoke_handler(|_webview, _arg| Ok(()))
+        .run()
+        .unwrap();
 }
