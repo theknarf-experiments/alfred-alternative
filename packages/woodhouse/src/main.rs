@@ -15,7 +15,7 @@ unsafe extern "C" fn callback(
     _inUserData: *mut ::std::os::raw::c_void
 ) -> OSStatus {
     println!("hotkey");
-    let html_content = "<html><body><h1>Hello, World!</h1></body></html>";
+    let html_content = include_str!("index.html");
 
     web_view::builder()
         .content(Content::Html(html_content))
