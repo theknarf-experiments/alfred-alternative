@@ -1,0 +1,9 @@
+{
+  "private": "true",
+	"scripts": {
+    "build:frontend": "yarn workspace frontend run build"
+	},
+  "workspaces": [
+    "packages/*"
+  ]
+}
