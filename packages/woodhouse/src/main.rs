@@ -7,7 +7,7 @@ extern crate libc;
 extern crate web_view;
 
 use web_view::*;
-include!("wrapper.rs");
+include!("../../macos-hotkey/src/wrapper.rs");
 
 unsafe extern "C" fn callback(
     _inHandlerCallRef: EventHandlerCallRef,

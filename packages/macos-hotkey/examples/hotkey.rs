@@ -4,7 +4,7 @@
 
 extern crate libc;
 
-include!("wrapper.rs");
+include!("../src/wrapper.rs");
 
 unsafe extern "C" fn callback(
     _inHandlerCallRef: EventHandlerCallRef,
@@ -20,6 +20,8 @@ fn main() {
         eventClass: kEventClassKeyboard as u32,
         eventKind: kEventHotKeyPressed as u32
     };
+
+    println!("Subscribing to hotkey cmd+space");
 
     unsafe {
         let err = InstallEventHandler(
