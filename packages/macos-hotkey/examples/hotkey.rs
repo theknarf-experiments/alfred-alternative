@@ -3,8 +3,9 @@
 #![allow(non_snake_case)]
 
 extern crate libc;
+extern crate macos_hotkey;
 
-include!("../src/wrapper.rs");
+use macos_hotkey::*;
 
 unsafe extern "C" fn callback(
     _inHandlerCallRef: EventHandlerCallRef,
@@ -16,45 +17,10 @@ unsafe extern "C" fn callback(
 }
 
 fn main() {
-    let eventType = EventTypeSpec {
-        eventClass: kEventClassKeyboard as u32,
-        eventKind: kEventHotKeyPressed as u32
-    };
-
     println!("Subscribing to hotkey cmd+space");
 
     unsafe {
-        let err = InstallEventHandler(
-            GetApplicationEventTarget(),
-            Some(callback),
-            1,
-            &eventType,
-            0 as *mut std::os::raw::c_void,
-            0 as *mut *mut OpaqueEventHandlerRef 
-        );
-
-        if err != noErr {
-            panic!("aah error");
-        }
-
-        let gMyHotKeyRef_box : Box<OpaqueEventHotKeyRef> = Box::new(OpaqueEventHotKeyRef {
-            _unused: []
-        });
-        let gMyHotKeyRef : EventHotKeyRef = Box::into_raw(gMyHotKeyRef_box);
-        let gMyHotKeyID  = EventHotKeyID {
-            signature: 101,
-            id: 1
-        };
-
-        RegisterEventHotKey(49, cmdKey, gMyHotKeyID, GetEventDispatcherTarget(), 0, &gMyHotKeyRef);
-
-        let event_box : Box<OpaqueEventRef>= Box::new(OpaqueEventRef {
-            _unused: [] 
-        });
-        let event : EventRef = Box::into_raw(event_box);
-
-        let eventTarget : EventTargetRef = GetEventDispatcherTarget();
-
+        let (event, eventTarget) = SubHotkey(callback);
         while ReceiveNextEvent(
             0,
             0 as *const EventTypeSpec,
