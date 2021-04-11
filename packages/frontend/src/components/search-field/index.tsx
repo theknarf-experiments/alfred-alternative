@@ -1,6 +1,7 @@
 import React from 'react';
+import { className } from './index.css.ts';
 
 const Search : React.FC = () =>
-	<input />;
+	<input className={className} />;
 
 export default Search;
