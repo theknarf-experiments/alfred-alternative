@@ -4,12 +4,12 @@ const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 module.exports = {
 	module: {
 		rules: [
-			{ test: /\.jsx?$/, use: 'babel-loader' }
+			{ test: /\.jsx?$/, exclude: /node_modules/, use: 'babel-loader' }
 		]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			inject: true
+			inject: 'body'
 		}),
 		new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/./]),
 	]
