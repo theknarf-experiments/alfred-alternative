@@ -1,2 +1,2 @@
 [workspace]
-members = ["packages/woodhouse"]
+members = ["packages/woodhouse", "packages/macos-hotkey"]
