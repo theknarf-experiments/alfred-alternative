@@ -1,0 +1,9 @@
+[package]
+name = "wasm-engine"
+version = "0.1.0"
+edition = "2018"
+
+[workspace]
+
+[dependencies]
+wasmer-runtime = "0.5.7"

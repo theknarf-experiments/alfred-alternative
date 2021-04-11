@@ -1,5 +1,6 @@
 # Custom
-dist/
+dist
+target/
 
 # Created by https://www.toptal.com/developers/gitignore/api/vim,macos,rust,osx,windows,intellij,sublimetext,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=vim,macos,rust,osx,windows,intellij,sublimetext,node

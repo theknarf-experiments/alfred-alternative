@@ -1,2 +1,8 @@
 [workspace]
-members = ["packages/woodhouse", "packages/macos-hotkey"]
+members = [
+  "packages/woodhouse",
+	"packages/api",
+	"packages/wasm-engine",
+	"packages/wasm-sample-app",
+	"packages/macos-hotkey"
+]
